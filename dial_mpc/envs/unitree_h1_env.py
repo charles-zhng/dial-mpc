@@ -24,56 +24,56 @@ from dial_mpc.utils.io_utils import get_model_path
 
 @dataclass
 class UnitreeH1WalkEnvConfig(BaseEnvConfig):
-    kp: Union[float, jax.Array] = jnp.array(
-        [
-            200.0,
-            200.0,
-            200.0,  # left hips
-            200.0,
-            60.0,  # left knee, ankle
-            200.0,
-            200.0,
-            200.0,  # right hips
-            200.0,
-            60.0,  # right knee, ankle
-            200.0,  # torso
-            60.0,
-            60.0,
-            60.0,
-            60.0,  # left shoulder, elbow
-            60.0,
-            60.0,
-            60.0,
-            60.0,  # right shoulder, elbow
-        ]
-    )
-    kd: Union[float, jax.Array] = jnp.array(
-        [
-            5.0,
-            5.0,
-            5.0,  # left hips
-            5.0,
-            1.5,  # left knee, ankle
-            5.0,
-            5.0,
-            5.0,  # right hips
-            5.0,
-            1.5,  # right knee, ankle
-            5.0,  # torso
-            1.5,
-            1.5,
-            1.5,
-            1.5,  # left shoulder, elbow
-            1.5,
-            1.5,
-            1.5,
-            1.5,  # right shoulder, elbow
-        ]
-    )
-    default_vx: float = 1.0
-    default_vy: float = 0.0
-    default_vyaw: float = 0.0
-    ramp_up_time: float = 2.0
+    # kp: Union[float, jax.Array] = jnp.array(
+    #     [
+    #         200.0,
+    #         200.0,
+    #         200.0,  # left hips
+    #         200.0,
+    #         60.0,  # left knee, ankle
+    #         200.0,
+    #         200.0,
+    #         200.0,  # right hips
+    #         200.0,
+    #         60.0,  # right knee, ankle
+    #         200.0,  # torso
+    #         60.0,
+    #         60.0,
+    #         60.0,
+    #         60.0,  # left shoulder, elbow
+    #         60.0,
+    #         60.0,
+    #         60.0,
+    #         60.0,  # right shoulder, elbow
+    #     ]
+    # )
+    # kd: Union[float, jax.Array] = jnp.array(
+    #     [
+    #         5.0,
+    #         5.0,
+    #         5.0,  # left hips
+    #         5.0,
+    #         1.5,  # left knee, ankle
+    #         5.0,
+    #         5.0,
+    #         5.0,  # right hips
+    #         5.0,
+    #         1.5,  # right knee, ankle
+    #         5.0,  # torso
+    #         1.5,
+    #         1.5,
+    #         1.5,
+    #         1.5,  # left shoulder, elbow
+    #         1.5,
+    #         1.5,
+    #         1.5,
+    #         1.5,  # right shoulder, elbow
+    #     ]
+    # )
+    # default_vx: float = 1.0
+    # default_vy: float = 0.0
+    # default_vyaw: float = 0.0
+    # ramp_up_time: float = 2.0
     gait: str = "jog"
 
 
@@ -125,20 +125,16 @@ class UnitreeH1WalkEnv(BaseEnv):
                 [-1.0, 1.0],
                 [0.0, 1.74],
                 [-0.6, 0.4],
-
                 [-0.3, 0.3],
                 [-0.3, 0.3],
                 [-1.0, 1.0],
                 [0.0, 1.74],
                 [-0.6, 0.4],
-
                 [-0.5, 0.5],
-
                 [-0.78, 0.78],
                 [-0.3, 0.3],
                 [-0.3, 0.3],
                 [-0.3, 0.3],
-
                 [-0.78, 0.78],
                 [-0.3, 0.3],
                 [-0.3, 0.3],

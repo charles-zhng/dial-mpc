@@ -4,6 +4,8 @@ from multiprocessing import shared_memory
 from dataclasses import dataclass
 import importlib
 import sys
+from dm_control import mjcf as mjcf_dm
+from dm_control.locomotion.walkers import rescale
 
 import yaml
 import argparse
@@ -60,9 +62,22 @@ class DialSim:
         self.kp = env_config.kp
         self.kd = env_config.kd
         self.leg_control = sim_config.sim_leg_control
-        self.mj_model = mujoco.MjModel.from_xml_path(
+
+        # scale rodent model hack
+        root = mjcf_dm.from_path(
             get_model_path(sim_config.robot_name, sim_config.scene_name).as_posix()
         )
+        rescale.rescale_subtree(
+            root,
+            0.9,
+            0.9,
+        )
+        for actuator in root.find_all("actuator"):
+            actuator.gainprm = [actuator.forcerange[1]]
+            del actuator.biastype
+            del actuator.biasprm
+        self.mj_model = mjcf_dm.Physics.from_mjcf_model(root).model.ptr
+
         self.mj_model.opt.timestep = self.sim_dt
         self.mj_data = mujoco.MjData(self.mj_model)
         self.q_history = np.zeros((self.n_acts, self.mj_model.nu))
